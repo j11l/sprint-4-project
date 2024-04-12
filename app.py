@@ -95,7 +95,7 @@ pickups['make'] = pickups['model'].apply(getmake)
 ### Data presentation
 ###
 
-st.header('How does pickup make affect its value?')
+st.header('How does a pickup truck\'s make affect its value?')
 
 st.write("Working with data from approximately a year of used car advertisements, I'll start by \
           comparing advertised prices for three makes of pickup truck that are well-represented in \
@@ -107,7 +107,7 @@ big3price_hist = px.histogram(big3price, x="price", color="make", barmode="overl
 big3price_hist.update_layout(yaxis_title_text = 'Number of Trucks Advertised',xaxis_title_text = 'Price')
 st.plotly_chart(big3price_hist)
 # This is the checkbox. It doesn't work, but please review the rest of my code while I figure this out
-hist1check = st.checkbox("Don't display prices over $100,000", value=False)
+hist1check = st.checkbox("Show this graph without prices over $100,000", value=False)
 if hist1check:
     del big3price_hist
     big3price = pickups.query("make in ['ford', 'chevrolet', 'ram'] & price < 100000")[['price','make']]
@@ -118,9 +118,9 @@ if hist1check:
 st.write("The median price for Chevrolet trucks appears to be a little higher than it is for Ford. \
           There are fewer Ram truck advertisements in our dataset, but the median sale price for \
           these is even higher. There are proportionately more lower-end trucks advertised for Ford \
-          and Chevrolet than there are for Ram. \n\n\
-          \
-          Let's take the Ram price histogram and compare it with Dodge and Nissan. The \
+          and Chevrolet than there are for Ram.")
+
+st.write("Let's take the Ram price histogram and compare it with Dodge and Nissan. The \
           histograms for these makes will look substantially different from the other ones.")
 
 # Graph 2: Price histogram: Ram, Dodge, Nissan
@@ -129,14 +129,14 @@ rdnprice_hist = px.histogram(rdnprice, x="price", color="make", barmode="overlay
 rdnprice_hist.update_layout(yaxis_title_text = 'Number of Trucks Advertised',xaxis_title_text = 'Price')
 st.plotly_chart(rdnprice_hist)
 
-st.write("(Prices above $150,000 have been excluded from this graph for clarity.)\n\n\
-          Dodge is firmly at the low end, but that's because the only model classified as Dodge in \
+st.write("(Prices above $150,000 have been excluded from this graph for clarity.)")
+st.write("Dodge is firmly at the low end, but that's because the only model classified as Dodge in \
           our dataset is the Dodge Dakota, which is an older model. Ram is a offshoot of the Dodge \
           brand; if we treat Ram and Dodge as being the same maker, the older Dodge trucks would \
           fill out the lower end of the Ram histogram and make the distribution look a little more \
-          like Chevrolet or Ford.\n\n\
-          \
-          Nissan, on the other hand, is interesting -- sale prices never seem to be above $25000, \
+          like Chevrolet or Ford.")
+
+st.write("Nissan, on the other hand, is interesting -- sale prices never seem to be above $25000, \
           half the asking price for some Ram trucks, but the distribution doesn't skew towards the \
           lower end. Could it be that Nissan trucks retain value, even if the base value is lower \
           overall? Let's look at a scatter plot.")
@@ -147,9 +147,9 @@ scatterfig.update_layout(yaxis_title_text='Price',xaxis_title_text='Model Year')
 st.plotly_chart(scatterfig)
 
 st.write("(Vehicles made before 1980, and those with sale prices above \$100000, have been excluded \
-          from this chart to make it more readable.)\n\n\
-          \
-          We expect to see lower sale prices for older cars, but if Nissan trucks \"retained value\" \
+          from this chart to make it more readable.)")
+
+st.write("We expect to see lower sale prices for older cars, but if Nissan trucks \"retained value\" \
           especially well, on a graph like this, the overall slope of the scatter cloud would be \
           less inclined than that of competing makes. That doesn't seem to be the case overall; \
           however, Nissan value does seem to hold its own compared to Dodge trucks for the same \
