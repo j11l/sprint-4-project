@@ -8,7 +8,7 @@ import plotly.express as px
 ###
 
 # Read in CSV data for dataframe + clean up.
-vehicles = pd.read_csv('../vehicles_us.csv',parse_dates=['date_posted'])
+vehicles = pd.read_csv('./vehicles_us.csv',parse_dates=['date_posted'])
 # Remove probable inaccurate prices from dataset.
 vehicles = vehicles[vehicles['price'] >= 500]
 # Correct model years for three particular vehicles where it's definitely wrong.
